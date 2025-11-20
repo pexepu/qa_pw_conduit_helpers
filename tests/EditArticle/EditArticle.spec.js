@@ -5,7 +5,7 @@ import { generateNewUserData } from '../../src/common/testData/generateNewUserDa
 import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
 import { ViewArticlePage } from '../../src/ui/pages/article/ViewArticlePage';
-import { createNewArticleWithTag, createNewArticle } from '../../src/ui/actions/article/createNewArticle';
+import { createNewArticle } from '../../src/ui/actions/article/createNewArticle';
 import {
   TITLE_CANNOT_BE_EMPTY,
   DESCRIPTION_CANNOT_BE_EMPTY,

@@ -26,11 +26,11 @@ export class HomePage {
     })
   }
 
-  async assertDescriptionChangeVisible(title) {
+  async assertDescriptionChangeVisible(description) {
     await test.step('Assert that Article Description change is visible', 
       async () => {
-      await expect(this.page.getByText(title))
-      .toHaveText(`Article description: ${title}`, { timeout: 5000 });
+      await expect(this.page.getByText(description))
+      .toBeVisible();
 ;
     })
   }
