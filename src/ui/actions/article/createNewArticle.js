@@ -4,25 +4,7 @@ import { HomePage } from '../../pages/HomePage';
 
 
 
-export async function createNewArticleNoTag(page, article) {
-  await test.step('Create new Article witout tag', async () => {
-    const createArticlePage = new CreateArticlePage(page);
-    const homePage = new HomePage(page);
-
-    await homePage.clickNewArticleLink();
-    
-
-    await createArticlePage.fillTitleField(article.title);
-    await createArticlePage.fillDescriptionField(article.description);
-    await createArticlePage.fillTextField(article.text);
-    await createArticlePage.clickPublishArticleButton();
-
-    
-
-  });
-}
-
-export async function createNewArticleWithTag(page, article) {
+export async function createNewArticle(page, article) {
   await test.step('Create new Article with tag', async () => {
     const createArticlePage = new CreateArticlePage(page);
     const homePage = new HomePage(page);
@@ -32,8 +14,11 @@ export async function createNewArticleWithTag(page, article) {
     await createArticlePage.fillTitleField(article.title);
     await createArticlePage.fillDescriptionField(article.description);
     await createArticlePage.fillTextField(article.text);
-    await createArticlePage.fillTagsField(article.tags[0]);
-    await createArticlePage.enterEtner();
+    if(article.tags && article.tags.length > 0) {
+      await createArticlePage.fillTagsField(article.tags[0]);
+      await createArticlePage.enterEtner();
+    };
+    
     await createArticlePage.clickPublishArticleButton();
 
     

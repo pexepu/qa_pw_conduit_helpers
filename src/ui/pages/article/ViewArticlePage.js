@@ -14,6 +14,8 @@ export class ViewArticlePage {
     .getByPlaceholder('What\'s this article about?');
     this.articleBody = page.getByPlaceholder('Write your article (in');
     this.articleTag = page.getByPlaceholder('Enter tags');
+    this.errorMessage = page.getByRole('list').nth(1);
+    this.articleTagsDelete = page.locator('i.ion-close-round');
   }
 
   async assertArticleTitleIsVisible(title) {
@@ -99,6 +101,23 @@ export class ViewArticlePage {
     })
   }
   
+  async enterEtner() {
+    await test.step('Press Enter to add tag', async () => {
+      await this.page.keyboard.press('Enter');
+    });
+  }
+
+  async assertErrorMessageContainsText(messageText) {
+    await test.step(`Assert error '${messageText}' is visible`, async () => {
+      await expect(this.errorMessage).toContainText(messageText);
+    });
+  }
+
+  async deleteArticleTags() {
+    await test.step('Delete article tag', async () => {
+      await this.articleTagsDelete.click();
+    });
+  }
 
   
 

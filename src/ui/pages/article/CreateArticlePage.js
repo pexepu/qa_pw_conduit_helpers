@@ -59,6 +59,6 @@ export class CreateArticlePage {
   async deleteArticleTags() {
     await test.step('Delete article tag', async () => {
       await this.articleTagsDelete.click();
-    })
+    });
   }
 }
