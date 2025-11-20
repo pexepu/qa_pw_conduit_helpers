@@ -10,6 +10,8 @@ export class CreateArticlePage {
       name: 'Publish Article',
     });
     this.errorMessage = page.getByRole('list').nth(1);
+    this.articleTags = page.getByPlaceholder('Enter tags');
+    this.articleTagsDelete = page.locator('form i');
   }
 
   async fillTitleField(title) {
@@ -30,15 +32,33 @@ export class CreateArticlePage {
     });
   }
 
+  async fillTagsField(text) {
+    await test.step('Fill optional fields (Tags)', async () => {
+      await this.articleTags.fill(text);
+    });
+  }
+
   async clickPublishArticleButton() {
     await test.step(`Click the 'Publish Article' button`, async () => {
       await this.publishArticleButton.click();
     });
   }
 
+  async enterEtner() {
+    await test.step('Press Enter to add tag', async () => {
+      await this.page.keyboard.press('Enter');
+    });
+  }
+
   async assertErrorMessageContainsText(messageText) {
-    await test.step(`Assert the '${messageText}' error is shown`, async () => {
+    await test.step(`Assert error '${messageText}' is visible`, async () => {
       await expect(this.errorMessage).toContainText(messageText);
     });
+  }
+
+  async deleteArticleTags() {
+    await test.step('Delete article tag', async () => {
+      await this.articleTagsDelete.click();
+    })
   }
 }

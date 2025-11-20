@@ -1,0 +1,42 @@
+import { test } from '@playwright/test';
+import { CreateArticlePage } from '../../pages/article/CreateArticlePage';
+import { HomePage } from '../../pages/HomePage';
+
+
+
+export async function createNewArticleNoTag(page, article) {
+  await test.step('Create new Article witout tag', async () => {
+    const createArticlePage = new CreateArticlePage(page);
+    const homePage = new HomePage(page);
+
+    await homePage.clickNewArticleLink();
+    
+
+    await createArticlePage.fillTitleField(article.title);
+    await createArticlePage.fillDescriptionField(article.description);
+    await createArticlePage.fillTextField(article.text);
+    await createArticlePage.clickPublishArticleButton();
+
+    
+
+  });
+}
+
+export async function createNewArticleWithTag(page, article) {
+  await test.step('Create new Article with tag', async () => {
+    const createArticlePage = new CreateArticlePage(page);
+    const homePage = new HomePage(page);
+
+    await homePage.clickNewArticleLink();
+
+    await createArticlePage.fillTitleField(article.title);
+    await createArticlePage.fillDescriptionField(article.description);
+    await createArticlePage.fillTextField(article.text);
+    await createArticlePage.fillTagsField(article.tags[0]);
+    await createArticlePage.enterEtner();
+    await createArticlePage.clickPublishArticleButton();
+
+    
+
+  });
+}
